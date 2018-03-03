@@ -1,0 +1,19 @@
+kernel vec4 customThresholdKernel (sampler i)
+{
+    vec2 dc = destCoord();
+    
+    // center pixel color
+    vec4 c = unpremultiply(sample(i, samplerTransform(i,dc+vec2(0.0,0.0))));
+    
+    // for a whiteboard, the max of a neighborhood is likely to be the color
+    // of the whiteboard
+    vec4 cmax = c;
+    cmax = max(unpremultiply(sample(i, samplerTransform(i,dc+vec2(10.0,0.0)))), cmax);
+    cmax = max(unpremultiply(sample(i, samplerTransform(i,dc+vec2(-10.0,0.0)))), cmax);
+    cmax = max(unpremultiply(sample(i, samplerTransform(i,dc+vec2(0.0,10.0)))), cmax);
+    cmax = max(unpremultiply(sample(i, samplerTransform(i,dc+vec2(0.0,-10.0)))), cmax);
+    
+    // normalize the center color according to the whiteboard color
+    vec4 r = c / cmax;
+    return premultiply(r);
+}

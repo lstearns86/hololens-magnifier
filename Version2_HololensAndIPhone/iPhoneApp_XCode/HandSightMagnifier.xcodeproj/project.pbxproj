@@ -1,0 +1,482 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5D3F3553D6BB53344CC8E67E /* Pods_HandSightMagnifier.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1112B028FD94AA059DFAB31 /* Pods_HandSightMagnifier.framework */; };
+		F61F813F2046083E00448BC5 /* LongOrFirmPressGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61F813E2046083E00448BC5 /* LongOrFirmPressGestureRecognizer.swift */; };
+		F63DE8502048EC810073B45B /* invertColorsOn.png in Resources */ = {isa = PBXBuildFile; fileRef = F63DE84E2048EC810073B45B /* invertColorsOn.png */; };
+		F63DE8512048EC810073B45B /* invertColorsOff.png in Resources */ = {isa = PBXBuildFile; fileRef = F63DE84F2048EC810073B45B /* invertColorsOff.png */; };
+		F63DE8542049F54D0073B45B /* customthreshold.cikernel in Sources */ = {isa = PBXBuildFile; fileRef = F63DE8532049F54D0073B45B /* customthreshold.cikernel */; };
+		F63DE8562049F78B0073B45B /* CustomThresholdFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63DE8552049F78B0073B45B /* CustomThresholdFilter.swift */; };
+		F65A00BA202A6BFB00496226 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65A00B9202A6BFB00496226 /* AppDelegate.swift */; };
+		F65A00BC202A6BFB00496226 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = F65A00BB202A6BFB00496226 /* art.scnassets */; };
+		F65A00BE202A6BFB00496226 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65A00BD202A6BFB00496226 /* ViewController.swift */; };
+		F65A00C1202A6BFB00496226 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F65A00BF202A6BFB00496226 /* Main.storyboard */; };
+		F65A00C3202A6BFB00496226 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F65A00C2202A6BFB00496226 /* Assets.xcassets */; };
+		F65A00C6202A6BFB00496226 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F65A00C4202A6BFB00496226 /* LaunchScreen.storyboard */; };
+		F65A00CE202B784700496226 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65A00CD202B784700496226 /* NetworkManager.swift */; };
+		F65A00D1202B84A700496226 /* UDPBroadcastConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65A00D0202B84A700496226 /* UDPBroadcastConnection.swift */; };
+		F6780C4820473E0800867B8A /* lightOn.png in Resources */ = {isa = PBXBuildFile; fileRef = F6780C4620473E0800867B8A /* lightOn.png */; };
+		F6780C4920473E0800867B8A /* lightOff.png in Resources */ = {isa = PBXBuildFile; fileRef = F6780C4720473E0800867B8A /* lightOff.png */; };
+		F6CF0BB02033DB1200017C09 /* ImageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CF0BAF2033DB1200017C09 /* ImageUtils.swift */; };
+		F6E6C270203CBC9600817F7C /* calibrationPattern.png in Resources */ = {isa = PBXBuildFile; fileRef = F6E6C26F203CBC9600817F7C /* calibrationPattern.png */; };
+		F6F9070920472E0B00DE6134 /* world.png in Resources */ = {isa = PBXBuildFile; fileRef = F6F9070620472E0B00DE6134 /* world.png */; };
+		F6F9070A20472E0B00DE6134 /* self.png in Resources */ = {isa = PBXBuildFile; fileRef = F6F9070720472E0B00DE6134 /* self.png */; };
+		F6F9070B20472E0B00DE6134 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = F6F9070820472E0B00DE6134 /* phone.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		15700037C25D72CC8DB5C077 /* Pods-HandSightMagnifier.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HandSightMagnifier.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HandSightMagnifier/Pods-HandSightMagnifier.debug.xcconfig"; sourceTree = "<group>"; };
+		A1112B028FD94AA059DFAB31 /* Pods_HandSightMagnifier.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HandSightMagnifier.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C8E06CC0F6A2C6FB50BC0661 /* Pods-HandSightMagnifier.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HandSightMagnifier.release.xcconfig"; path = "Pods/Target Support Files/Pods-HandSightMagnifier/Pods-HandSightMagnifier.release.xcconfig"; sourceTree = "<group>"; };
+		F61F813E2046083E00448BC5 /* LongOrFirmPressGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongOrFirmPressGestureRecognizer.swift; sourceTree = "<group>"; };
+		F63DE84E2048EC810073B45B /* invertColorsOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = invertColorsOn.png; sourceTree = "<group>"; };
+		F63DE84F2048EC810073B45B /* invertColorsOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = invertColorsOff.png; sourceTree = "<group>"; };
+		F63DE8532049F54D0073B45B /* customthreshold.cikernel */ = {isa = PBXFileReference; lastKnownFileType = text; path = customthreshold.cikernel; sourceTree = "<group>"; };
+		F63DE8552049F78B0073B45B /* CustomThresholdFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomThresholdFilter.swift; sourceTree = "<group>"; };
+		F65A00B6202A6BFB00496226 /* HandSightMagnifier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HandSightMagnifier.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F65A00B9202A6BFB00496226 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F65A00BB202A6BFB00496226 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
+		F65A00BD202A6BFB00496226 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F65A00C0202A6BFB00496226 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F65A00C2202A6BFB00496226 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F65A00C5202A6BFB00496226 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F65A00C7202A6BFB00496226 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F65A00CD202B784700496226 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		F65A00CF202B84A700496226 /* UDPBroadcast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPBroadcast.h; sourceTree = "<group>"; };
+		F65A00D0202B84A700496226 /* UDPBroadcastConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDPBroadcastConnection.swift; sourceTree = "<group>"; };
+		F6780C4620473E0800867B8A /* lightOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lightOn.png; sourceTree = "<group>"; };
+		F6780C4720473E0800867B8A /* lightOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lightOff.png; sourceTree = "<group>"; };
+		F6CF0BAF2033DB1200017C09 /* ImageUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUtils.swift; sourceTree = "<group>"; };
+		F6E6C26F203CBC9600817F7C /* calibrationPattern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calibrationPattern.png; sourceTree = "<group>"; };
+		F6F9070620472E0B00DE6134 /* world.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = world.png; sourceTree = "<group>"; };
+		F6F9070720472E0B00DE6134 /* self.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = self.png; sourceTree = "<group>"; };
+		F6F9070820472E0B00DE6134 /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone.png; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F65A00B3202A6BFB00496226 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D3F3553D6BB53344CC8E67E /* Pods_HandSightMagnifier.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		74F2E0D1EF8F12A170F46909 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				15700037C25D72CC8DB5C077 /* Pods-HandSightMagnifier.debug.xcconfig */,
+				C8E06CC0F6A2C6FB50BC0661 /* Pods-HandSightMagnifier.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		99F10FCBA461612A1156CE9E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A1112B028FD94AA059DFAB31 /* Pods_HandSightMagnifier.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F63DE8522048EDDA0073B45B /* images */ = {
+			isa = PBXGroup;
+			children = (
+				F63DE84F2048EC810073B45B /* invertColorsOff.png */,
+				F63DE84E2048EC810073B45B /* invertColorsOn.png */,
+				F6780C4720473E0800867B8A /* lightOff.png */,
+				F6780C4620473E0800867B8A /* lightOn.png */,
+				F6F9070820472E0B00DE6134 /* phone.png */,
+				F6F9070720472E0B00DE6134 /* self.png */,
+				F6F9070620472E0B00DE6134 /* world.png */,
+				F6E6C26F203CBC9600817F7C /* calibrationPattern.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		F65A00AD202A6BFB00496226 = {
+			isa = PBXGroup;
+			children = (
+				F65A00B8202A6BFB00496226 /* HandSightMagnifier */,
+				F65A00B7202A6BFB00496226 /* Products */,
+				74F2E0D1EF8F12A170F46909 /* Pods */,
+				99F10FCBA461612A1156CE9E /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		F65A00B7202A6BFB00496226 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F65A00B6202A6BFB00496226 /* HandSightMagnifier.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F65A00B8202A6BFB00496226 /* HandSightMagnifier */ = {
+			isa = PBXGroup;
+			children = (
+				F63DE8522048EDDA0073B45B /* images */,
+				F65A00CF202B84A700496226 /* UDPBroadcast.h */,
+				F65A00D0202B84A700496226 /* UDPBroadcastConnection.swift */,
+				F65A00B9202A6BFB00496226 /* AppDelegate.swift */,
+				F65A00BB202A6BFB00496226 /* art.scnassets */,
+				F65A00BD202A6BFB00496226 /* ViewController.swift */,
+				F65A00BF202A6BFB00496226 /* Main.storyboard */,
+				F65A00C2202A6BFB00496226 /* Assets.xcassets */,
+				F65A00C4202A6BFB00496226 /* LaunchScreen.storyboard */,
+				F65A00C7202A6BFB00496226 /* Info.plist */,
+				F65A00CD202B784700496226 /* NetworkManager.swift */,
+				F6CF0BAF2033DB1200017C09 /* ImageUtils.swift */,
+				F61F813E2046083E00448BC5 /* LongOrFirmPressGestureRecognizer.swift */,
+				F63DE8532049F54D0073B45B /* customthreshold.cikernel */,
+				F63DE8552049F78B0073B45B /* CustomThresholdFilter.swift */,
+			);
+			path = HandSightMagnifier;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F65A00B5202A6BFB00496226 /* HandSightMagnifier */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F65A00CA202A6BFB00496226 /* Build configuration list for PBXNativeTarget "HandSightMagnifier" */;
+			buildPhases = (
+				1E7330BE85C4B22F65B2EDEE /* [CP] Check Pods Manifest.lock */,
+				F65A00B2202A6BFB00496226 /* Sources */,
+				F65A00B3202A6BFB00496226 /* Frameworks */,
+				F65A00B4202A6BFB00496226 /* Resources */,
+				81962A5C0833C5225EFE4BC6 /* [CP] Embed Pods Frameworks */,
+				291A4CF59696BC05A2D3ED90 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HandSightMagnifier;
+			productName = HandSightMagnifier;
+			productReference = F65A00B6202A6BFB00496226 /* HandSightMagnifier.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F65A00AE202A6BFB00496226 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0920;
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = "Lee Stearns";
+				TargetAttributes = {
+					F65A00B5202A6BFB00496226 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = F65A00B1202A6BFB00496226 /* Build configuration list for PBXProject "HandSightMagnifier" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F65A00AD202A6BFB00496226;
+			productRefGroup = F65A00B7202A6BFB00496226 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F65A00B5202A6BFB00496226 /* HandSightMagnifier */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F65A00B4202A6BFB00496226 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F6780C4820473E0800867B8A /* lightOn.png in Resources */,
+				F65A00BC202A6BFB00496226 /* art.scnassets in Resources */,
+				F6780C4920473E0800867B8A /* lightOff.png in Resources */,
+				F63DE8512048EC810073B45B /* invertColorsOff.png in Resources */,
+				F6E6C270203CBC9600817F7C /* calibrationPattern.png in Resources */,
+				F63DE8502048EC810073B45B /* invertColorsOn.png in Resources */,
+				F65A00C6202A6BFB00496226 /* LaunchScreen.storyboard in Resources */,
+				F65A00C3202A6BFB00496226 /* Assets.xcassets in Resources */,
+				F6F9070920472E0B00DE6134 /* world.png in Resources */,
+				F65A00C1202A6BFB00496226 /* Main.storyboard in Resources */,
+				F6F9070B20472E0B00DE6134 /* phone.png in Resources */,
+				F6F9070A20472E0B00DE6134 /* self.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1E7330BE85C4B22F65B2EDEE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HandSightMagnifier-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		291A4CF59696BC05A2D3ED90 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HandSightMagnifier/Pods-HandSightMagnifier-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		81962A5C0833C5225EFE4BC6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-HandSightMagnifier/Pods-HandSightMagnifier-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HandSightMagnifier/Pods-HandSightMagnifier-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F65A00B2202A6BFB00496226 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F61F813F2046083E00448BC5 /* LongOrFirmPressGestureRecognizer.swift in Sources */,
+				F65A00CE202B784700496226 /* NetworkManager.swift in Sources */,
+				F65A00BE202A6BFB00496226 /* ViewController.swift in Sources */,
+				F65A00BA202A6BFB00496226 /* AppDelegate.swift in Sources */,
+				F63DE8562049F78B0073B45B /* CustomThresholdFilter.swift in Sources */,
+				F6CF0BB02033DB1200017C09 /* ImageUtils.swift in Sources */,
+				F65A00D1202B84A700496226 /* UDPBroadcastConnection.swift in Sources */,
+				F63DE8542049F54D0073B45B /* customthreshold.cikernel in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		F65A00BF202A6BFB00496226 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F65A00C0202A6BFB00496226 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F65A00C4202A6BFB00496226 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F65A00C5202A6BFB00496226 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F65A00C8202A6BFB00496226 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F65A00C9202A6BFB00496226 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F65A00CB202A6BFB00496226 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15700037C25D72CC8DB5C077 /* Pods-HandSightMagnifier.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 95L684P52A;
+				INFOPLIST_FILE = HandSightMagnifier/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.leestearns.utilities.HandSightMagnifier;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F65A00CC202A6BFB00496226 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C8E06CC0F6A2C6FB50BC0661 /* Pods-HandSightMagnifier.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 95L684P52A;
+				INFOPLIST_FILE = HandSightMagnifier/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.leestearns.utilities.HandSightMagnifier;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F65A00B1202A6BFB00496226 /* Build configuration list for PBXProject "HandSightMagnifier" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F65A00C8202A6BFB00496226 /* Debug */,
+				F65A00C9202A6BFB00496226 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F65A00CA202A6BFB00496226 /* Build configuration list for PBXNativeTarget "HandSightMagnifier" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F65A00CB202A6BFB00496226 /* Debug */,
+				F65A00CC202A6BFB00496226 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F65A00AE202A6BFB00496226 /* Project object */;
+}
