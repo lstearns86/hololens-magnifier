@@ -14,7 +14,6 @@
 		F63DE8542049F54D0073B45B /* customthreshold.cikernel in Sources */ = {isa = PBXBuildFile; fileRef = F63DE8532049F54D0073B45B /* customthreshold.cikernel */; };
 		F63DE8562049F78B0073B45B /* CustomThresholdFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63DE8552049F78B0073B45B /* CustomThresholdFilter.swift */; };
 		F65A00BA202A6BFB00496226 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65A00B9202A6BFB00496226 /* AppDelegate.swift */; };
-		F65A00BC202A6BFB00496226 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = F65A00BB202A6BFB00496226 /* art.scnassets */; };
 		F65A00BE202A6BFB00496226 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65A00BD202A6BFB00496226 /* ViewController.swift */; };
 		F65A00C1202A6BFB00496226 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F65A00BF202A6BFB00496226 /* Main.storyboard */; };
 		F65A00C3202A6BFB00496226 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F65A00C2202A6BFB00496226 /* Assets.xcassets */; };
@@ -41,7 +40,6 @@
 		F63DE8552049F78B0073B45B /* CustomThresholdFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomThresholdFilter.swift; sourceTree = "<group>"; };
 		F65A00B6202A6BFB00496226 /* HandSightMagnifier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HandSightMagnifier.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F65A00B9202A6BFB00496226 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F65A00BB202A6BFB00496226 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		F65A00BD202A6BFB00496226 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F65A00C0202A6BFB00496226 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F65A00C2202A6BFB00496226 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -128,7 +126,6 @@
 				F65A00CF202B84A700496226 /* UDPBroadcast.h */,
 				F65A00D0202B84A700496226 /* UDPBroadcastConnection.swift */,
 				F65A00B9202A6BFB00496226 /* AppDelegate.swift */,
-				F65A00BB202A6BFB00496226 /* art.scnassets */,
 				F65A00BD202A6BFB00496226 /* ViewController.swift */,
 				F65A00BF202A6BFB00496226 /* Main.storyboard */,
 				F65A00C2202A6BFB00496226 /* Assets.xcassets */,
@@ -206,7 +203,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6780C4820473E0800867B8A /* lightOn.png in Resources */,
-				F65A00BC202A6BFB00496226 /* art.scnassets in Resources */,
 				F6780C4920473E0800867B8A /* lightOff.png in Resources */,
 				F63DE8512048EC810073B45B /* invertColorsOff.png in Resources */,
 				F6E6C270203CBC9600817F7C /* calibrationPattern.png in Resources */,
