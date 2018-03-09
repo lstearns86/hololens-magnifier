@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
@@ -85,6 +86,9 @@ public class CustomNetworkManager : MonoBehaviour {
                     var commandStreamIn = args.Socket.InputStream.AsStreamForRead();
                     var reader = new StreamReader(commandStreamIn, Encoding.UTF8);
 
+                    var commandStreamOut = args.Socket.OutputStream.AsStreamForWrite();
+                    commandOut = new StreamWriter(commandStreamOut, Encoding.UTF8);                    
+
                     while (true)
                     {
                         string message = await reader.ReadLineAsync();
@@ -112,6 +116,10 @@ public class CustomNetworkManager : MonoBehaviour {
                     var count = await videoStreamIn.LoadAsync(20);
 
                     double avgLag = 0, avgLagCount = 0;
+                    double avgFps = 0, frameCount = 0;
+                    Queue<double> fpsQueue = new Queue<double>();
+                    double prevFps = 0;
+                    double minFps = 0;
 
                     while (true)
                     {
@@ -145,19 +153,28 @@ public class CustomNetworkManager : MonoBehaviour {
                         //ImageReceived?.Invoke(buffer);
                         //ImageDecoded?.Invoke(buffer, 720, 1280);
 
-                        if(videoStreamIn.UnconsumedBufferLength > 0 || (elapsed > avgLag + 200))
-                        {
-                            LoggingManager.Log("Frame Dropped (" + (elapsed > avgLag + 200 ? "excess lag" : "next frame ready") + ")");
+                        // Fixes lag getting worse over time, but causes image freezing issue
+                        //if(videoStreamIn.UnconsumedBufferLength > 0 || (elapsed > avgLag + 200))
+                        //{
+                        //    LoggingManager.Log("Frame Dropped (" + (elapsed > avgLag + 200 ? "excess lag" : "next frame ready") + ")");
 
-                            // clean up used memory
-                            buffer = null;
-                            GC.GetTotalMemory(true);
+                        //    // clean up used memory
+                        //    buffer = null;
+                        //    GC.GetTotalMemory(true);
 
-                            // start to read the next image
-                            count = await videoStreamIn.LoadAsync(20);
+                        //    // start to read the next image
+                        //    count = await videoStreamIn.LoadAsync(20);
 
-                            // skip to next frame without procesing the current one
-                            continue;
+                        //    // skip to next frame without procesing the current one
+                        //    continue;
+                        //}
+
+                        // send confirmation that we received this frame along with the minimum fps over the past couple of seconds (rounded down to prevent lag)
+                        if(commandOut != null) {
+                            string confirmationString = string.Format("{0},{1},{2},{3},{4}\n", h, m, s, ms, (int)Math.Ceiling(minFps - 1));
+                            commandOut.Write(confirmationString);
+                            commandOut.Flush();
+                            //Debug.Log(confirmationString);
                         }
 
                         //LoggingManager.Log("Read Image: " + (DateTime.Now - start).TotalMilliseconds.ToString("0.0"));
@@ -200,6 +217,18 @@ public class CustomNetworkManager : MonoBehaviour {
                         data = null;
                         decodedBytes = null;
                         GC.GetTotalMemory(true);
+
+                        // update fps
+                        double currFps = 1.0 / (DateTime.Now - start).TotalSeconds;
+                        if (frameCount > 0) avgFps *= frameCount;
+                        avgFps += currFps;
+                        frameCount++;
+                        avgFps /= frameCount;
+                        prevFps = currFps;
+                        fpsQueue.Enqueue(currFps);
+                        if (fpsQueue.Count > 20) fpsQueue.Dequeue();
+                        minFps = double.MaxValue;
+                        foreach (double val in fpsQueue) if (val < minFps) minFps = val;
 
                         // start to read the next image
                         count = await videoStreamIn.LoadAsync(20);
