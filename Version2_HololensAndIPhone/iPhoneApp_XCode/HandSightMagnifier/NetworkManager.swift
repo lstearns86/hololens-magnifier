@@ -23,6 +23,10 @@ class NetworkManager : NSObject, NetServiceDelegate, NetServiceBrowserDelegate, 
     var commandSocket:GCDAsyncSocket?
     var videoSocket:GCDAsyncSocket?
     
+    let lineSeparator = Data(bytes: Array("\n".utf8))
+    
+    public var fps = 10.0
+    
     func start() {
 
         // find the hololens IP address (advertised as a bonjour service)
@@ -72,12 +76,6 @@ class NetworkManager : NSObject, NetServiceDelegate, NetServiceBrowserDelegate, 
         commandSocket = GCDAsyncSocket(delegate: self, delegateQueue: DispatchQueue.main)
         do {
             try commandSocket?.connect(toHost: ipAddress, onPort: commandPort, withTimeout: 5)
-//            if commandSocket != nil && commandSocket!.isConnected {
-//                print("Connected to command socket")
-//                commandConnected = true
-//            } else {
-//                print("Couldn't connect to command socket")
-//            }
         } catch {
             print("Couldn't connect to command socket:")
             print(error)
@@ -86,12 +84,6 @@ class NetworkManager : NSObject, NetServiceDelegate, NetServiceBrowserDelegate, 
         videoSocket = GCDAsyncSocket(delegate: self, delegateQueue: DispatchQueue.main)
         do {
             try videoSocket?.connect(toHost: ipAddress, onPort: videoPort, withTimeout: 5)
-//            if videoSocket != nil && videoSocket!.isConnected {
-//                print("Connected to video socket")
-//                videoConnected = true
-//            } else {
-//                print("Couldn't connect to video socket")
-//            }
         } catch {
             print("Couldn't connect to video socket:")
             print(error)
@@ -102,15 +94,33 @@ class NetworkManager : NSObject, NetServiceDelegate, NetServiceBrowserDelegate, 
 //        restart()
     }
     
-//    func socket(_ sock: GCDAsyncSocket, didConnectTo url: URL) {
-//        if sock == commandSocket {
-//            print("Command socket connected to \(url)")
-//            commandConnected = true
-//        } else if sock == videoSocket {
-//            print("Video socket connected to \(url)")
-//            videoConnected = true
-//        }
-//    }
+    func socket(_ sock: GCDAsyncSocket, didConnectToHost host: String, port: UInt16) {
+        if sock == commandSocket {
+            print("Command socket connected to \(host)")
+            commandConnected = true
+//            commandSocket!.readData(toLength: 5, withTimeout: -1, tag: 0)
+            sock.readData(to: lineSeparator, withTimeout: -1, tag: 0)
+        } else if sock == videoSocket {
+            print("Video socket connected to \(host)")
+            videoConnected = true
+        }
+    }
+    
+    func socket(_ sock: GCDAsyncSocket, didRead data: Data, withTag tag: Int) {
+        
+        if let text = String(data: data, encoding: .utf8) {
+            let components = text.trimmingCharacters(in: CharacterSet.newlines).split(separator: ",")
+            if components.count == 5 {
+                if let tempFps = Double(components[4]) {
+                    if fps != tempFps { print("set fps to \(fps)") }
+                    fps = tempFps
+                }
+            }
+        
+        }
+//        commandSocket!.readData(toLength: 5, withTimeout: -1, tag: 0)
+        sock.readData(to: lineSeparator, withTimeout: -1, tag: 0)
+    }
     
     func send(text: String) {
         if(commandSocket != nil && commandSocket!.isConnected) {

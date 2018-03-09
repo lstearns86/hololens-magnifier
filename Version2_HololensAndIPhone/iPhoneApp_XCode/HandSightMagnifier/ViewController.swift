@@ -165,7 +165,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         
         let now = Date()
         let elapsed = now.timeIntervalSince(lastFrameSent)
-        if elapsed > frameDelay && !videoPaused {
+        if elapsed > 1.0 / net.fps && !videoPaused {
 //            DispatchQueue.global(qos: .userInteractive).async {
 //                let start = Date()
                 let ciImg = CIImage(cvPixelBuffer: frame.capturedImage)
