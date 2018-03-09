@@ -1,0 +1,6 @@
+framework module Pods_HandSightMagnifier {
+  umbrella header "Pods-HandSightMagnifier-umbrella.h"
+
+  export *
+  module * { export * }
+}
