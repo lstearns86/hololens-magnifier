@@ -28,6 +28,7 @@ public class MainManager : MonoBehaviour {
     private Vector3 worldOrigin;
     private Vector3 calibrationPosition;
     private Quaternion calibrationRotation;
+    private float calibrationInitRotation = 0;
 
     private Vector3 selfOffset = Vector3.zero;
     private Quaternion selfRotation = Quaternion.identity;
@@ -217,13 +218,19 @@ public class MainManager : MonoBehaviour {
                                 VirtualPhone.transform.rotation = Quaternion.identity;
                                 VirtualPhone.transform.Rotate(Vector3.right, -60);
                                 VirtualPhone.transform.position = Camera.main.transform.position + new Vector3(0, -0.1f, 0.5f);
-                                //VirtualPhone.transform.RotateAround(Camera.main.transform.position, Vector3.up, rand.Next(60) - 45);
-                                //VirtualPhone.transform.RotateAround(Camera.main.transform.position, Vector3.right, rand.Next(20) - 10);
+                                calibrationInitRotation = Camera.main.transform.rotation.eulerAngles.y;
+                                VirtualPhone.transform.RotateAround(Camera.main.transform.position, Vector3.up, calibrationInitRotation);
                                 calibrationPosition = VirtualPhone.transform.position;
                                 calibrationRotation = VirtualPhone.transform.rotation;
                             }
                             else if(argument == "stop")
                             {
+                                // reset alignment since calibration has likely changed how the display will appear
+                                phoneOffset = Vector3.zero;
+                                phoneRotation = Quaternion.identity;
+                                selfOffset = Vector3.zero;
+                                selfRotation = Quaternion.identity;
+
                                 VirtualPhone.SetActive(false);
                                 VideoCanvas.gameObject.SetActive(true);
                                 StatusText.gameObject.SetActive(false);
@@ -305,7 +312,9 @@ public class MainManager : MonoBehaviour {
                                 VirtualPhone.transform.rotation = Quaternion.identity;
                                 VirtualPhone.transform.Rotate(Vector3.right, -60);
                                 VirtualPhone.transform.position = Camera.main.transform.position + new Vector3(0, -0.1f, 0.5f);
-                                VirtualPhone.transform.RotateAround(Camera.main.transform.position, Vector3.up, correspondences.Count * 45);
+                                float rotation = calibrationInitRotation + correspondences.Count * 45;
+                                while (rotation >= 360) rotation -= 360;
+                                VirtualPhone.transform.RotateAround(Camera.main.transform.position, Vector3.up, rotation);
                                 //VirtualPhone.transform.RotateAround(Camera.main.transform.position, Vector3.right, rand.Next(20) - 10);
                                 calibrationPosition = VirtualPhone.transform.position;
                                 calibrationRotation = VirtualPhone.transform.rotation;
@@ -315,13 +324,42 @@ public class MainManager : MonoBehaviour {
                         {
                             float value = float.Parse(argument);
 
+                            // Locate pivot point for scaling by raycasting from the camera to the canvas
+                            RaycastHit hit;
+                            Vector3 pivot = VideoCanvas.transform.position;
+                            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit))
+                            {
+                                Transform objectHit = hit.transform;
+                                Vector3 hitPoint3D = hit.point;
+                                //Vector3 hitPoint2D = VideoCanvas.transform.TransformPoint(hit.point);
+
+                                pivot = hitPoint3D;
+                            }
+
+                            // Apply scale factor
                             double scaleX = VideoCanvas.transform.localScale.x * value;
                             double scaleY = VideoCanvas.transform.localScale.y * value;
                             if (scaleX < videoDefaultScaleX) scaleX = videoDefaultScaleX;
                             if (scaleY < videoDefaultScaleY) scaleY = videoDefaultScaleY;
                             VideoCanvas.transform.localScale = new Vector3((float)scaleX, (float)scaleY, 1);
 
-                            LoggingManager.Log("Scaled by " + value);
+                            // update position / offset depending on current mode
+                            Vector3 offset = (float)(value - 1) * (pivot - VideoCanvas.transform.position);
+                            switch (attachmentMode)
+                            {
+                                case Attachment.Phone:
+                                    phoneOffset -= offset;
+                                    break;
+                                case Attachment.Self:
+                                    selfOffset -= offset;
+                                    break;
+                                case Attachment.World:
+                                    VideoCanvas.transform.position -= offset;
+                                    break;
+                            }
+                            //LoggingManager.Log("Updated offset by (" + offset.x + ", " + offset.y + ", " + offset.z + ")");
+
+                            //LoggingManager.Log("Scaled by " + value);
                         }
                         else if(command == "pan")
                         {
@@ -353,14 +391,14 @@ public class MainManager : MonoBehaviour {
                                     {
                                         Vector3 translation = new Vector3(x * 5, y * 5, 0);
                                         worldTranslation += VideoCanvas.transform.TransformVector(translation);
-                                        LoggingManager.Log("Set translation: " + worldTranslation.x + ", " + worldTranslation.y);
+                                        //LoggingManager.Log("Set translation: " + worldTranslation.x + ", " + worldTranslation.y);
                                     }
                                     else if(touches == 2)
                                     {
                                         Vector3 translation = new Vector3(0, 0, y / 2000);
                                         worldTranslation += VideoCanvas.transform.TransformVector(translation);
                                         worldRotation = Quaternion.Euler(0, worldRotation.eulerAngles.y + x / 10, 0);
-                                        LoggingManager.Log("Set rotation: " + worldRotation.eulerAngles.y);
+                                        //LoggingManager.Log("Set rotation: " + worldRotation.eulerAngles.y);
                                     }
                                 }
                             }
@@ -415,6 +453,13 @@ public class MainManager : MonoBehaviour {
         {
             UnityEngine.WSA.Application.InvokeOnAppThread(() =>
             {
+                // TODO: check if resolution is changing, adjust zoom level to maintain same size
+                //if(VideoFrame.texture != null && (VideoFrame.texture.width != width || VideoFrame.texture.height != height))
+                //{
+                //    float scaleChange = (float)width / VideoFrame.texture.width;
+                //    VideoCanvas.transform.localScale = new Vector3(VideoFrame.transform.localScale.x * scaleChange, VideoFrame.transform.localScale.y * scaleChange, 1);
+                //}
+
                 ShowImage(VideoFrame, image, width, height);
             }, false);
         };
@@ -433,6 +478,7 @@ public class MainManager : MonoBehaviour {
             var texture = new Texture2D(width, height, TextureFormat.BGRA32, false);
             texture.LoadRawTextureData(image);
             target.texture = texture;
+            texture.Apply();
         }
     }
 
