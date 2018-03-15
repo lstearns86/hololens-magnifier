@@ -111,9 +111,12 @@ class NetworkManager : NSObject, NetServiceDelegate, NetServiceBrowserDelegate, 
         if let text = String(data: data, encoding: .utf8) {
             let components = text.trimmingCharacters(in: CharacterSet.newlines).split(separator: ",")
             if components.count == 5 {
-                if let tempFps = Double(components[4]) {
-                    if fps != tempFps { print("set fps to \(fps)") }
-                    fps = tempFps
+                if var tempFps = Double(components[4]) {
+                    tempFps = max(1.0, tempFps)
+                    if fps != tempFps {
+                        fps = tempFps
+                        print("set fps to \(fps)")
+                    }
                 }
             }
         

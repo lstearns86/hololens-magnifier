@@ -20,6 +20,8 @@
 		F65A00C6202A6BFB00496226 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F65A00C4202A6BFB00496226 /* LaunchScreen.storyboard */; };
 		F65A00CE202B784700496226 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65A00CD202B784700496226 /* NetworkManager.swift */; };
 		F65A00D1202B84A700496226 /* UDPBroadcastConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65A00D0202B84A700496226 /* UDPBroadcastConnection.swift */; };
+		F67393B9205B033800A7D443 /* freezeFrameOff.png in Resources */ = {isa = PBXBuildFile; fileRef = F67393B7205B033800A7D443 /* freezeFrameOff.png */; };
+		F67393BA205B033800A7D443 /* freezeFrameOn.png in Resources */ = {isa = PBXBuildFile; fileRef = F67393B8205B033800A7D443 /* freezeFrameOn.png */; };
 		F6780C4820473E0800867B8A /* lightOn.png in Resources */ = {isa = PBXBuildFile; fileRef = F6780C4620473E0800867B8A /* lightOn.png */; };
 		F6780C4920473E0800867B8A /* lightOff.png in Resources */ = {isa = PBXBuildFile; fileRef = F6780C4720473E0800867B8A /* lightOff.png */; };
 		F6CF0BB02033DB1200017C09 /* ImageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CF0BAF2033DB1200017C09 /* ImageUtils.swift */; };
@@ -48,6 +50,8 @@
 		F65A00CD202B784700496226 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		F65A00CF202B84A700496226 /* UDPBroadcast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPBroadcast.h; sourceTree = "<group>"; };
 		F65A00D0202B84A700496226 /* UDPBroadcastConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDPBroadcastConnection.swift; sourceTree = "<group>"; };
+		F67393B7205B033800A7D443 /* freezeFrameOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = freezeFrameOff.png; sourceTree = "<group>"; };
+		F67393B8205B033800A7D443 /* freezeFrameOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = freezeFrameOn.png; sourceTree = "<group>"; };
 		F6780C4620473E0800867B8A /* lightOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lightOn.png; sourceTree = "<group>"; };
 		F6780C4720473E0800867B8A /* lightOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lightOff.png; sourceTree = "<group>"; };
 		F6CF0BAF2033DB1200017C09 /* ImageUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUtils.swift; sourceTree = "<group>"; };
@@ -89,6 +93,8 @@
 		F63DE8522048EDDA0073B45B /* images */ = {
 			isa = PBXGroup;
 			children = (
+				F67393B7205B033800A7D443 /* freezeFrameOff.png */,
+				F67393B8205B033800A7D443 /* freezeFrameOn.png */,
 				F63DE84F2048EC810073B45B /* invertColorsOff.png */,
 				F63DE84E2048EC810073B45B /* invertColorsOn.png */,
 				F6780C4720473E0800867B8A /* lightOff.png */,
@@ -202,9 +208,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F67393B9205B033800A7D443 /* freezeFrameOff.png in Resources */,
 				F6780C4820473E0800867B8A /* lightOn.png in Resources */,
 				F6780C4920473E0800867B8A /* lightOff.png in Resources */,
 				F63DE8512048EC810073B45B /* invertColorsOff.png in Resources */,
+				F67393BA205B033800A7D443 /* freezeFrameOn.png in Resources */,
 				F6E6C270203CBC9600817F7C /* calibrationPattern.png in Resources */,
 				F63DE8502048EC810073B45B /* invertColorsOn.png in Resources */,
 				F65A00C6202A6BFB00496226 /* LaunchScreen.storyboard in Resources */,

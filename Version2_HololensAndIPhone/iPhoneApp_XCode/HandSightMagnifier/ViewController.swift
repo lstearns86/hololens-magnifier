@@ -19,6 +19,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     @IBOutlet weak var modeOverlay: UIView!
     @IBOutlet weak var debugOverlay: UIView!
     @IBOutlet weak var processedImageView: UIImageView!
+    @IBOutlet weak var fpsLabel: UILabel!
     
     // gesture recognizers
     @IBOutlet var twoFingerDoubleTapGestureRecognizer: UITapGestureRecognizer!
@@ -31,6 +32,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     @IBOutlet weak var phoneButton: UIButton!
     @IBOutlet weak var lightButton: UIButton!
     @IBOutlet weak var invertColorsButton: UIButton!
+    @IBOutlet weak var freezeFrameButton: UIButton!
     
     var net: NetworkManager!
     var calibrating = false, panning = false, invert = false
@@ -168,6 +170,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
         
+        fpsLabel.text = "\(net.fps) FPS"
+        
         let now = Date()
         let elapsed = now.timeIntervalSince(lastFrameSent)
         if elapsed > 1.0 / net.fps && !videoPaused {
@@ -176,13 +180,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 let ciImg = CIImage(cvPixelBuffer: frame.capturedImage)
                 if let cgImage = CIContext(options: nil).createCGImage(ciImg, from: ciImg.extent) {
                     if sendHighResolutionNextFrame {
+                        videoPaused = true
+                        sendHighResolutionNextFrame = false
                         if let uiImgRaw = UIImage(cgImage: cgImage).rotateRight() {
                             let uiImg = invert ? uiImgRaw.invert() : uiImgRaw
                             if showProcessedImage { processedImageView.image = uiImg }
                             if let data = UIImageJPEGRepresentation(uiImg, 100) {
                                 self.net.send(data: data)
-                                sendHighResolutionNextFrame = false
-                                videoPaused = true
                             }
                         }
                     } else {
@@ -427,5 +431,32 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         
         sceneView.session.run(sceneView.session.configuration!, options: .resetTracking)
         
+    }
+    
+    @IBAction func closeDebugOverlayButtonPressed(_ sender: UIButton) {
+        
+        if calibrating {
+            net.send(text: "{calibration: stop}")
+            calibrating = false
+        }
+        
+        calibrationPattern.isHidden = true
+        debugOverlay.isHidden = true
+    }
+    
+    @IBAction func closeModeOverlayButtonPressed(_ sender: UIButton) {
+        
+        modeOverlay.isHidden = true
+    }
+    
+    @IBAction func freezeFrameButtonPressed(_ sender: UIButton) {
+        freezeFrameButton.isSelected = !freezeFrameButton.isSelected
+        
+        if freezeFrameButton.isSelected {
+            sendHighResolutionNextFrame = true
+        } else {
+            sendHighResolutionNextFrame = false
+            videoPaused = false
+        }
     }
 }
