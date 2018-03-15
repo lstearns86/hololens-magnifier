@@ -37,6 +37,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     let frameDelay = 1.0 / 8.0 // in seconds
     var lastFrameSent = Date()
     var previousScale = 1.0
+    var zoom:CGFloat = 1.0
+    var torchLevel : Float = 1.0
+    
+    var resolutionScale:CGFloat = 0.3
+    var cropScale:CGFloat = 1.0
     
     let lightVibration = UIImpactFeedbackGenerator(style: .light)
     let mediumVibration = UIImpactFeedbackGenerator(style: .medium)
@@ -181,7 +186,16 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                             }
                         }
                     } else {
-                        if let uiImgRaw = UIImage(cgImage: cgImage).rotateRight()?.resize(width: 432, height: 768) {
+//                        if let uiImgRaw = UIImage(cgImage: cgImage).rotateRight()?.resize(width: 432, height: 768) {
+                        if var uiImgRaw = UIImage(cgImage: cgImage).rotateRight() {
+                            
+                            let width = uiImgRaw.size.width
+                            let height = uiImgRaw.size.height
+                            
+                            // dynamically resize or crop depending on zoom level
+                            if cropScale < 1 { uiImgRaw = uiImgRaw.cropCenter(CGSize(width: width * cropScale, height: height * cropScale)) }
+                            if resolutionScale < 1 { uiImgRaw = uiImgRaw.resize(width: width * resolutionScale, height: height * resolutionScale) }
+                            
                             let uiImg = invert ? uiImgRaw.invert() : uiImgRaw
                             if showProcessedImage { processedImageView.image = uiImg }
                             if let data = UIImageJPEGRepresentation(uiImg, 100) {
@@ -255,7 +269,38 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         let scaleDelta = sender.scale / CGFloat(previousScale)
         previousScale = Double(sender.scale)
         
-        net.send(text: "{scale: \(scaleDelta)}")
+        zoom *= scaleDelta
+        if zoom < 1 { zoom = 1 }
+        
+        if(zoom > 4)
+        {
+            cropScale = 4.0 / zoom
+        }
+        else
+        {
+            cropScale = 1
+            net.send(text: "{scale: \(scaleDelta)}")
+        }
+        
+//        switch zoom {
+//        case let x where x < 2:
+//            resolutionScale = 0.25
+//            cropScale = 1
+//            break
+//        case let x where x < 4:
+//            resolutionScale = 1
+//            cropScale = 0.5
+//            break
+//        case let x where x >= 4:
+//            resolutionScale = 1
+//            cropScale = 0.25
+//            break
+//        default:
+//            resolutionScale = 0.25
+//            cropScale = 1
+//        }
+//        resolutionScale = min(1, 0.25 * zoom)
+//        cropScale = min(1, 1 / (0.25 * zoom))
     }
     
     @IBAction func panGestureRecognized(_ sender: UIPanGestureRecognizer) {
@@ -263,6 +308,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         let translation = sender.translation(in: view)
         net.send(text: "{pan: {x: \(translation.x), y: \(translation.y), touches: \(sender.numberOfTouches)}}")
         sender.setTranslation(CGPoint.zero, in: view)
+        
+        if lightButton.isSelected {
+            torchLevel += Float(-translation.y / 200)
+            torchLevel = max(0, min(1, torchLevel))
+            setTorchBrightness(level: torchLevel)
+        }
     }
     
     @IBAction func doubleTapGestureRecognized(_ sender: UITapGestureRecognizer) {
@@ -329,9 +380,31 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 try device.lockForConfiguration()
                 
                 if on == true {
-                    device.torchMode = .on
+//                    device.torchMode = .on
+                    try device.setTorchModeOn(level: max(0.01, min(torchLevel, AVCaptureDevice.maxAvailableTorchLevel)))
                 } else {
                     device.torchMode = .off
+                }
+                
+                device.unlockForConfiguration()
+            } catch {
+                print("Torch could not be used")
+            }
+        } else {
+            print("Torch is not available")
+        }
+    }
+    
+    func setTorchBrightness(level: Float) {
+        guard let device = AVCaptureDevice.default(for: AVMediaType.video)
+            else {return}
+        
+        if device.hasTorch {
+            do {
+                try device.lockForConfiguration()
+                
+                if device.torchMode == .on {
+                    try device.setTorchModeOn(level: max(0.01, min(level, AVCaptureDevice.maxAvailableTorchLevel)))
                 }
                 
                 device.unlockForConfiguration()

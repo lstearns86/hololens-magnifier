@@ -72,6 +72,19 @@ extension UIImage {
         return newImage!
     }
     
+    func cropCenter(_ targetSize: CGSize) -> UIImage {
+        
+        let rect = CGRect(x: (self.size.width - targetSize.width) / 2, y: (self.size.height - targetSize.height) / 2, width: targetSize.width, height: targetSize.height)
+        
+        // slow, should find a better way to do it with cgImage.cropping
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, self.scale)
+        self.draw(at: CGPoint(x: -rect.origin.x, y: -rect.origin.y))
+        let croppedImg = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return croppedImg!;
+    }
+    
     func pixelData() -> Data? {
         let size = self.size
         let dataSize = size.width * size.height * 4
