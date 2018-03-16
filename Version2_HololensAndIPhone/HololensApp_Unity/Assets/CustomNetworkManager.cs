@@ -21,6 +21,8 @@ public class CustomNetworkManager : MonoBehaviour {
     public string serverName;
     public string serverAddress;
 
+    private int prevSentFps = 0;
+
 #if !UNITY_EDITOR
     StreamSocketListener commandSocket, videoSocket;
     StreamWriter commandOut;
@@ -117,7 +119,7 @@ public class CustomNetworkManager : MonoBehaviour {
 
                     double avgLag = 0, avgLagCount = 0;
                     double avgFps = 0, frameCount = 0;
-                    Queue<double> fpsQueue = new Queue<double>();
+                    Queue<Tuple<DateTime, double>> fpsQueue = new Queue<Tuple<DateTime, double>>();
                     double prevFps = 0;
                     double minFps = 0;
 
@@ -171,7 +173,13 @@ public class CustomNetworkManager : MonoBehaviour {
 
                         // send confirmation that we received this frame along with the minimum fps over the past couple of seconds (rounded down to prevent lag)
                         if(commandOut != null) {
-                            string confirmationString = string.Format("{0},{1},{2},{3},{4}\n", h, m, s, ms, (int)Math.Ceiling(minFps - 1));
+                            int fps = (int)Math.Ceiling(minFps - 1);
+                            if (fps != prevSentFps)
+                            {
+                                LoggingManager.Log("Set FPS: " + fps);
+                                prevSentFps = fps;
+                            }
+                            string confirmationString = string.Format("{0},{1},{2},{3},{4}\n", h, m, s, ms, fps);
                             commandOut.Write(confirmationString);
                             commandOut.Flush();
                             //Debug.Log(confirmationString);
@@ -225,10 +233,10 @@ public class CustomNetworkManager : MonoBehaviour {
                         frameCount++;
                         avgFps /= frameCount;
                         prevFps = currFps;
-                        fpsQueue.Enqueue(currFps);
-                        if (fpsQueue.Count > 20) fpsQueue.Dequeue();
+                        fpsQueue.Enqueue(new Tuple<DateTime, double>(DateTime.Now, currFps));
+                        while (fpsQueue.Count > 20 || (DateTime.Now - fpsQueue.Peek().Item1).TotalSeconds > 2) fpsQueue.Dequeue();
                         minFps = double.MaxValue;
-                        foreach (double val in fpsQueue) if (val < minFps) minFps = val;
+                        foreach (var val in fpsQueue) if (val.Item2 < minFps) minFps = val.Item2;
 
                         // start to read the next image
                         count = await videoStreamIn.LoadAsync(20);
