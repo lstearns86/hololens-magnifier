@@ -276,15 +276,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         zoom *= scaleDelta
         if zoom < 1 { zoom = 1 }
         
-        if(zoom > 4)
-        {
-            cropScale = 4.0 / zoom
-        }
-        else
-        {
+//        if(zoom > 4 && !videoPaused)
+//        {
+//            cropScale = 4.0 / zoom
+//        }
+//        else
+//        {
             cropScale = 1
             net.send(text: "{scale: \(scaleDelta)}")
-        }
+//        }
         
 //        switch zoom {
 //        case let x where x < 2:
@@ -454,9 +454,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         
         if freezeFrameButton.isSelected {
             sendHighResolutionNextFrame = true
+            net.send(text: "{frozen: true}")
         } else {
             sendHighResolutionNextFrame = false
             videoPaused = false
+            net.send(text: "{frozen: false}")
         }
     }
 }
