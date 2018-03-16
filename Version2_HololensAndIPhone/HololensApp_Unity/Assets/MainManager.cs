@@ -29,6 +29,7 @@ public class MainManager : MonoBehaviour {
     private Vector3 calibrationPosition;
     private Quaternion calibrationRotation;
     private float calibrationInitRotation = 0;
+    private bool imageFrozen = false;
 
     private Vector3 selfOffset = Vector3.zero;
     private Quaternion selfRotation = Quaternion.identity;
@@ -363,28 +364,28 @@ public class MainManager : MonoBehaviour {
                         }
                         else if(command == "pan")
                         {
-                            if(uiMode == UIMode.FineCalibration)
+                            var values = Regex.Match(argument, "\\{\"?x\"?\\: ?([0-9-.e]+), ?\"?y\"?\\: ?([0-9-.e]+), ?\"?touches\"?\\: ?([0-9]+)\\}");
+                            bool success = false;
+                            float x = 0, y = 0;
+                            int touches = 0;
+                            if (values != null && values.Success)
                             {
-                                var values = Regex.Match(argument, "\\{\"?x\"?\\: ?([0-9-.e]+), ?\"?y\"?\\: ?([0-9-.e]+), ?\"?touches\"?\\: ?([0-9]+)\\}");
-                                bool success = false;
-                                float x = 0, y = 0;
-                                int touches = 0;
-                                if (values != null && values.Success)
+                                string xStr = values.Groups.Count > 1 ? values.Groups[1].Value : null;
+                                string yStr = values.Groups.Count > 2 ? values.Groups[2].Value : null;
+                                string tStr = values.Groups.Count > 3 ? values.Groups[3].Value : null;
+
+                                try
                                 {
-                                    string xStr = values.Groups.Count > 1 ? values.Groups[1].Value : null;
-                                    string yStr = values.Groups.Count > 2 ? values.Groups[2].Value : null;
-                                    string tStr = values.Groups.Count > 3 ? values.Groups[3].Value : null;
-
-                                    try
-                                    {
-                                        x = xStr == null ? 0 : float.Parse(xStr);
-                                        y = yStr == null ? 0 : float.Parse(yStr);
-                                        touches = tStr == null ? 0 : int.Parse(tStr);
-                                        success = true;
-                                    }
-                                    catch { LoggingManager.LogError("Bad argument: " + xStr + ", " + yStr + ", " + tStr); }
+                                    x = xStr == null ? 0 : float.Parse(xStr);
+                                    y = yStr == null ? 0 : float.Parse(yStr);
+                                    touches = tStr == null ? 0 : int.Parse(tStr);
+                                    success = true;
                                 }
+                                catch { LoggingManager.LogError("Bad argument: " + xStr + ", " + yStr + ", " + tStr); }
+                            }
 
+                            if (uiMode == UIMode.FineCalibration)
+                            {
                                 if(success)
                                 {
                                     if(touches == 1)
@@ -399,6 +400,25 @@ public class MainManager : MonoBehaviour {
                                         worldTranslation += VideoCanvas.transform.TransformVector(translation);
                                         worldRotation = Quaternion.Euler(0, worldRotation.eulerAngles.y + x / 10, 0);
                                         //LoggingManager.Log("Set rotation: " + worldRotation.eulerAngles.y);
+                                    }
+                                }
+                            }
+                            else if (imageFrozen)
+                            {
+                                if(success && touches == 1)
+                                {
+                                    Vector3 translation = new Vector3(x * 5, y * 5, 0);
+                                    switch (attachmentMode)
+                                    {
+                                        case Attachment.Phone:
+                                            phoneOffset += VideoCanvas.transform.TransformVector(translation);
+                                            break;
+                                        case Attachment.Self:
+                                            selfOffset += VideoCanvas.transform.TransformVector(translation);
+                                            break;
+                                        case Attachment.World:
+                                            VideoCanvas.transform.position += VideoCanvas.transform.TransformVector(translation);
+                                            break;
                                     }
                                 }
                             }
@@ -442,6 +462,17 @@ public class MainManager : MonoBehaviour {
                             else if (argument == "stop")
                             {
                                 positioningMode = Positioning.Fixed;
+                            }
+                        }
+                        else if (command == "frozen")
+                        {
+                            if (argument == "true")
+                            {
+                                imageFrozen = true;
+                            }
+                            else
+                            {
+                                imageFrozen = false;
                             }
                         }
                     }
